@@ -9,8 +9,9 @@ SELECT department_id, sum(salary) FROM employees GROUP BY department_id;
 
 SELECT department_id, max(salary) FROM employees GROUP BY department_id;
 
+SELECT department_id, TRUNC(AVG(salary), 2) FROM employees GROUP BY department_id;
 
-SELECT department_id, count(*) FROM employees GROUP BY department_id;
+SELECT department_id, count(*) AS "부서별 인원 수" FROM employees GROUP BY department_id;
 
 select distinct JOB_ID from employees;
 
