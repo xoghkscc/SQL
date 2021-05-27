@@ -4,14 +4,18 @@
 SELECT
     first_name,
     job_title,
-    nvl(commission_pct, 0)                       AS "커미션",
+    nvl(commission_pct, 0)                       AS 커미션,
     salary * ( 1 + nvl(commission_pct, 0) )            AS "커미션 적용 월급",
     max_salary,
-    trunc(salary * ( 1 + nvl(commission_pct, 0) ) / max_salary, 2) *100 ||'%'  AS "비율"
+    trunc(salary * ( 1 + nvl(commission_pct, 0) ) / max_salary, 3) *100  AS "비율"
 FROM
     employees
     INNER JOIN jobs USING(job_id);
+ 
+
     
+
+
     
 --매니저 이름이 Nancy(108)를 가지는 사원들에 대해서 commission_pct를 0.12로 바꾸자
 UPDATE employees
