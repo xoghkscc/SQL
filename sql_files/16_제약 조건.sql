@@ -100,3 +100,24 @@ INSERT INTO customer_rank VALUES (30, 0.4, 0.5);
 ALTER TABLE customer_info MODIFY (crank NUMBER(2) CONSTRAINT CI_CRANK_FK REFERENCES customer_rank(crank));
 
 SELECT * FROM customer_rank;
+
+INSERT INTO fruits3(fid, fname, fcolor, fsize, lid) 
+VALUES(3, 'Kiwi', 'Olive', 'S', 10);
+DELETE FROM fruit_locations WHERE lid = 40;--얘는 삭제가 가능하나
+DELETE FROM fruit_locations WHERE lid = 10;--얘는 삭제 불가능
+
+SELECT * FROM user_constraints WHERE table_name = 'FRUITS3';
+
+ALTER TABLE fruits3 DROP CONSTRAINT FRUITS3_LID_FK;
+commit;
+ALTER TABLE fruits3 ADD CONSTRAINT FRUITS3_LID_FK FOREIGN KEY (lid) REFERENCES
+    fruit_locations(lid) ON DELETE CASCADE;
+ALTER TABLE fruits3 ADD CONSTRAINT FRUITS3_LID_FK FOREIGN KEY (lid) REFERENCES
+    fruit_locations(lid) ON DELETE SET NULL;
+
+ALTER TABLE fruits3 ADD CONSTRAINT FRUITS3_LID_FK FOREIGN KEY (lid) REFERENCES
+    fruit_locations(lid) ON DELETE SET NULL;
+
+DELETE FROM fruit_locations WHERE lid = 10;
+
+ROLLBACK;
