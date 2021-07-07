@@ -89,6 +89,14 @@ SELECT TO_NUMBER('15,000,000￦', '999,999,999L') FROM dual;--15000000(즉 숫�
 *	특정 컬럼의 값을 통해 표시할 데이터를 선택한다
 *	Switch case 같은 역할을 한다(단 LIKE 구문 쓰지 못함)<br/>
 ![1](https://user-images.githubusercontent.com/82793713/124763468-f5502900-df6e-11eb-9115-29aef841c07d.png)
-
-
+*	DECODE는 해당 컬럼의 값과 정확하게 일치하는 값만 이용할 수 있지만 CASE문은 조건을 사용할 수 있다
+```C
+SELECT last_name, job_id, salary as before_salary , 
+CASE WHEN job_id = 'IT_PROG' THEN salary * 1.15
+WHEN job_id = 'FI_ACCOUNT' THEN salary * 1.1
+WHEN job_id LIKE '%CLERK%' THEN salary * 1.05
+ELSE salary
+END AS after_salary
+FROM employees;
+```
 
