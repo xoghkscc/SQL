@@ -306,16 +306,57 @@ ALTER TABLE 테이블명 DROP COLUMN 컬럼명
 *	FOREIGN KEY : 해당 컬럼을 외래키로 설정한다.
 *	CHECK : 원하는 데이터의 조건을 직접 지정하여 도메인 무결성을 유지할 수 있다
 #### 제약조건을 추가하는 방법
-*	1.	테이블 생성과 동시에 제약조건 추가하기
-*	UNIQUE : 해당 컬럼에 중복되는 값을 허용하지 않는 규칙. 항상 유일한 값을 갖도록 한다
-*	PRIMARY KEY : 해당 컬럼을 기본키로 설정한다. NOU NULL + UNIQUE. 테이블 당 하나
-*	FOREIGN KEY : 해당 컬럼을 외래키로 설정한다.
-*	CHECK : 원하는 데이터의 조건을 직접 지정하여 도메인 무결성을 유지할 수 있다
-
-
-
-
-
-
+1.	테이블 생성과 동시에 제약조건 추가하기
+```C
+컬럼명 컬럼타임 CONSTRAINT 제약조건명 제약조건타입
+```
+2.	테이블 생성 후 제약조건 추가하기
+```C
+ALTER TABLE 테이블명 ADD CONSTRAINT 제약조건명 제약조건타입(컬럼명)
+```
+#### 컬럼을 참조하는 방법
+*	컬럼을 만듦과 동시에 참조하게 하는 쿼리문
+```C
+ALTER TABLE (테이블명) ADD ((참조할새컬럼) (유형) CONSTRAINT (CONSTRAINT이름) REFERENCES (참조연결할 테이블 이름(컬럼));
+ALTER TABLE fruits3 ADD (lid NUMBER(2) CONSTRAINT FRUITS3_LID_FK REFERENCES fruit_locations(lid));
+```
+*	존재하는 컬럼을 참조하는 쿼리문
+```C
+ALTER TABLE (테이블명) MODIFY ((참조할컬럼) (유형) CONSTRAINT (CONSTRAINT이름) REFERENCES (참조연결할 테이블 이름(컬럼));
+ALTER TABLE fruits3 MODIFY (lid NUMBER(2) CONSTRAINT FRUITS3_LID_FK REFERENCES fruit_locations(lid));
+```
+### 18_시퀀스
+*	기본키로 사용하기 편하도록 설계된 자동 번호 생성기
+*	User_sequences 데이터 딕셔너리로 확인할 수 있다.
+```C
+CREATE SEQUENCE 시퀀스명
+    [START WITH n] – 시퀸스의 시작 번호 설정
+	[INCREMENT BY n] – 시퀀스의 증가값 설정
+	[MAXVALUE n | NOMAXVALUE] – 최대값 설정
+	[MINVALUE n | NOMINVALUE] – 최소값 설정
+	[CYCLE | NOCYCLE] -최대값에 도달했을 때 순환 여부 설정
+	[CACHE n | NOCACHE] – 메모리상에 미리 만들어 놓을 시퀀스의 개수 설정
+CREATE SEQUENCE sodas_seq START WITH 4 INCREMENT BY 1;
+```
+#### 시퀀스 쓰는 법
+```C
+INSERT INTO 테이블명 VALUES (시퀸스명.nextval, 데이터1, 데이터2, …) --순차적으로 데이터를 넣는 방법
+SELECT sodas_seq.currval FROM dual;--현재 몇 번째 번호까지 사용증인지 알고 싶을 때
+DROP SEQUENCE 시퀀스명-시퀀스 삭제
+ALTER SEQUENCE 시퀀스명 (이후 CREATE SEQUENCE와 같음)-시퀀스 수정
+```
+### 19_뷰
+*	물리적인 기본 테이블들을 이용해 생성한 논리적인 가상의 테이블
+*	기본 테이블에서 파생된 DB 객체
+*	사용자는 주어진 뷰를 통해 기본 테이블을 제한적으로 사용하게끔 할 수 있다.
+#### 뷰 만들기
+*	CREATE OR REPLACE VIEW [스키마.][뷰 이름] AS SELECT문
+```C
+CREATE OR REPLACE VIEW dept30_view AS 
+    SELECT * 
+    FROM employees 
+    WHERE department_id = 50
+    WITH CHECK OPTION;
+```
 
 
