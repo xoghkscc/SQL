@@ -85,4 +85,4 @@ SELECT TO_CHAR(TRUNC(sysdate, 'year'), 'YYYY/MM/DD HH24:MI:SS') FROM dual;--2021
 ```C
 SELECT TO_NUMBER('15,000,000￦', '999,999,999L') FROM dual;--15000000(즉 숫자로 다시 돌아옴)
 ```
-
+### 8_DECODE(컬럼명, 조건1, 결과1, 조건2, 결과2, ……)
