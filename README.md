@@ -87,6 +87,14 @@ SELECT TO_NUMBER('15,000,000￦', '999,999,999L') FROM dual;--15000000(즉 숫�
 ```
 ### 8_DECODE(컬럼명, 조건1, 결과1, 조건2, 결과2, ……)
 *	특정 컬럼의 값을 통해 표시할 데이터를 선택한다
+```C
+SELECT
+    last_name,
+     job_id,
+    salary as before_slary,
+     DECODE(job_id, 'IT_PROG', SALARY * 1.15, 'FI_ACCOUNT', SALARY * 1.10 ) as after_salary
+    FROM employees WHERE JOB_ID NOT LIKE '%CLERK%'
+```
 *	Switch case 같은 역할을 한다(단 LIKE 구문 쓰지 못함)<br/>
 ![1](https://user-images.githubusercontent.com/82793713/124763468-f5502900-df6e-11eb-9115-29aef841c07d.png)
 *	DECODE는 해당 컬럼의 값과 정확하게 일치하는 값만 이용할 수 있지만 CASE문은 조건을 사용할 수 있다
