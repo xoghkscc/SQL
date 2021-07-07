@@ -86,3 +86,9 @@ SELECT TO_CHAR(TRUNC(sysdate, 'year'), 'YYYY/MM/DD HH24:MI:SS') FROM dual;--2021
 SELECT TO_NUMBER('15,000,000￦', '999,999,999L') FROM dual;--15000000(즉 숫자로 다시 돌아옴)
 ```
 ### 8_DECODE(컬럼명, 조건1, 결과1, 조건2, 결과2, ……)
+*	특정 컬럼의 값을 통해 표시할 데이터를 선택한다
+*	Switch case 같은 역할을 한다(단 LIKE 구문 쓰지 못함)
+![image](https://user-images.githubusercontent.com/82793713/124763259-bd48e600-df6e-11eb-81ea-a2b670aa5b48.png)
+
+
+
