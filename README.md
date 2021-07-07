@@ -88,7 +88,7 @@ SELECT TO_NUMBER('15,000,000￦', '999,999,999L') FROM dual;--15000000(즉 숫�
 ### 8_DECODE(컬럼명, 조건1, 결과1, 조건2, 결과2, ……)
 *	특정 컬럼의 값을 통해 표시할 데이터를 선택한다
 *	Switch case 같은 역할을 한다(단 LIKE 구문 쓰지 못함)
-![image](https://user-images.githubusercontent.com/82793713/124763259-bd48e600-df6e-11eb-81ea-a2b670aa5b48.png)
+![1](https://user-images.githubusercontent.com/82793713/124763468-f5502900-df6e-11eb-9115-29aef841c07d.png)
 
 
 
